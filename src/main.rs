@@ -9,13 +9,18 @@ use core::panic::PanicInfo;
 
 #[no_mangle]
 pub extern "C" fn _start() -> !{
-    vga_buffer::print_something();
-
+    println!("Hello Clinio{}","!");
+    print!("\n\n\n");
+    println!("This is for the OS class");
+    println!("\nLet's get those 400 points!!!!");
+    panic!("My panic message");
     loop{}
 }
 
 #[panic_handler]
 fn panic(_info: &PanicInfo) -> ! {
+    println!("{}",_info);
+
     loop{}
 }
 
