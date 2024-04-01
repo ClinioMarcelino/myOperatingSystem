@@ -14,7 +14,9 @@ pub extern "C" fn _start() -> ! {
 
     class_Os::init();
 
-    x86_64::instructions::interrupts::int3();
+    unsafe{
+        *(0xdeadbeff as *mut u8) = 42;
+    }
 
     #[cfg(test)]
     test_main();
