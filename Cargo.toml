@@ -5,7 +5,7 @@ edition = "2018"
 authors = ["Clinio Marcelino <cliniof@gmail.com"]
 
 [[test]]
-name = "should_panic"
+name = "stack_overflow"
 harness = false
 
 [dependencies]
