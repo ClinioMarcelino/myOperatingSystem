@@ -5,12 +5,16 @@
 #![reexport_test_harness_main = "test_main"]
 #![feature(abi_x86_interrupt)]
 
+#[cfg(test)]
+use bootloader::{entry_point, BootInfo};
+
 use core::panic::PanicInfo;
 
 pub mod serial;
 pub mod vga_buffer;
 pub mod interrupts;
 pub mod gdt;
+pub mod memory;
 
 pub trait Testable {
     fn run(&self) -> ();
@@ -85,4 +89,16 @@ pub fn init() {
         interrupts::PICS.lock().initialize() 
     };
     x86_64::instructions::interrupts::enable();
+}
+
+#[cfg(test)]
+entry_point!(test_kernel_main);
+
+#[cfg(test)]
+fn test_kernel_main(_boot_info: &'static BootInfo) -> ! {
+    use x86_64::instructions::hlt;
+
+    init();
+    test_main();
+    hlt_loop();
 }
