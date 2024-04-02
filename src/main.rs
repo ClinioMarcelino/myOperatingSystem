@@ -14,6 +14,17 @@ pub extern "C" fn _start() -> ! {
 
     class_Os::init();
 
+    let ptr = 0x2031b2 as *mut u8;
+    unsafe {
+        let x = *ptr;
+    }
+    println!("read worked");
+
+    unsafe{
+        *ptr = 42;
+    }
+    println!("write worked");
+
     #[cfg(test)]
     test_main();
 
