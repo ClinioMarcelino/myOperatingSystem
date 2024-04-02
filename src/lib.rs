@@ -15,6 +15,7 @@ pub mod vga_buffer;
 pub mod interrupts;
 pub mod gdt;
 pub mod memory;
+pub mod allocator;
 
 pub trait Testable {
     fn run(&self) -> ();
@@ -102,3 +103,5 @@ fn test_kernel_main(_boot_info: &'static BootInfo) -> ! {
     test_main();
     hlt_loop();
 }
+
+extern crate alloc;
